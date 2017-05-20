@@ -4,6 +4,15 @@ var router = express.Router();
 var quizController = require('../controllers/quiz_controller');
 var tipController = require('../controllers/tip_controller');
 var userController = require('../controllers/user_controller');
+var sessionController = require('../controllers/session_controller');
+
+//-----------------------------------------------------------
+
+// autologout
+router.all('*',sessionController.deleteExpiredUserSession);
+
+//-----------------------------------------------------------
+
 
 
 
@@ -20,6 +29,14 @@ router.get('/author', function(req, res, next) {
 // Autoload de rutas que usen :quizId
 router.param('quizId', quizController.load);
 router.param('userId', userController.load);
+
+
+// Definición de rutas de sesion
+router.get('/session',    sessionController.new);     // formulario login
+router.post('/session',   sessionController.create);  // crear sesión
+router.delete('/session', sessionController.destroy); // destruir sesión
+
+
 
 // Definición de rutas de cuenta
 router.get('/users',                    userController.index);   // listado usuarios
