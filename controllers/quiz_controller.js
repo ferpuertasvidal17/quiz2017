@@ -208,7 +208,6 @@ exports.randomplay = function (req, res, next) {
 exports.randomcheck = function (req, res, next) {
     	
     var answer = req.query.answer || "";
-    var score+=1;
 
     var result = answer.toLowerCase().trim() === req.quiz.answer.toLowerCase().trim();
 
