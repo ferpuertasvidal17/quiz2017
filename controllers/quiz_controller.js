@@ -6,7 +6,7 @@ var paginate = require('../helpers/paginate').paginate;
 // Autoload el quiz asociado a :quizId
 exports.load = function (req, res, next, quizId) {
 
-    models.Quiz.findById(quizId)
+    models.Quiz.findById(quizId, { include: [ models.Tip ] })
     .then(function (quiz) {
         if (quiz) {
             req.quiz = quiz;
@@ -72,6 +72,7 @@ exports.show = function (req, res, next) {
 
     res.render('quizzes/show', {quiz: req.quiz});
 };
+
 
 
 // GET /quizzes/new
@@ -184,6 +185,37 @@ exports.check = function (req, res, next) {
     res.render('quizzes/result', {
         quiz: req.quiz,
         result: result,
+        answer: answer
+    });
+};
+
+// GET /quizzes/randomplay 
+
+exports.randomplay = function (req, res, next) {
+
+	var answer = req.query.answer || '';    	
+	var score = req.query.score || '0';
+
+    res.render('quizzes/random_play', {
+        quiz: req.quiz,
+        answer: answer,
+        score: score
+    });
+};
+
+// GET /quizzes/randomcheck/:quizId?answer=respuesta
+
+exports.randomcheck = function (req, res, next) {
+    	
+    var answer = req.query.answer || "";
+    var score+=1;
+
+    var result = answer.toLowerCase().trim() === req.quiz.answer.toLowerCase().trim();
+
+    res.render('quizzes/random_result', {
+        quiz: req.quiz,
+        result: result,
+	score: score,
         answer: answer
     });
 };
