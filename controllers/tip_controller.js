@@ -67,6 +67,7 @@ exports.create = function (req, res, next) {
 };
 
 
+
 // GET /quizzes/:quizId/tips/:tipId/accept
 exports.accept = function (req, res, next) {
 
@@ -96,3 +97,4 @@ exports.destroy = function (req, res, next) {
         next(error);
     });
 };
+

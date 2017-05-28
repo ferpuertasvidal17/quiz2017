@@ -27,12 +27,14 @@ module.exports = function (sequelize, DataTypes) {
                 defaultValue: false
             }
         },
+
         {
             instanceMethods: {
                 verifyPassword: function (password) {
                     return encryptPassword(password, this.salt) === this.password;
                 }
             }
+
         });
 };
 

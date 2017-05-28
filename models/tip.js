@@ -10,6 +10,7 @@ module.exports = function (sequelize, DataTypes) {
             accepted: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false
+
             }
         });
 };
