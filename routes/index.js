@@ -64,8 +64,8 @@ router.get('/quizzes/:quizId(\\d+)/check', quizController.check);
 router.get('/quizzes/:quizId(\\d+)/tips/new',  tipController.new);
 router.post('/quizzes/:quizId(\\d+)/tips', tipController.create);
 
-router.get('/quizzes/:quizId(\\d+)/randomplay', quizController.randomplay);
-router.get('/quizzes/:quizId(\\d+)/randomcheck', quizController.randomcheck);
+router.get('/quizzes/randomplay', quizController.randomplay);
+router.get('/quizzes/randomcheck/:quizId(\\d+)', quizController.randomcheck);
 
 
 // Pagina de ayuda
