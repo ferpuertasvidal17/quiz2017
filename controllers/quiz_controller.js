@@ -191,7 +191,7 @@ exports.check = function (req, res, next) {
 
 // GET /quizzes/randomplay 
 var score = 0;
-
+var newId;
 var almacenar = [];
 
 exports.randomplay = function (req, res, next) {
@@ -204,7 +204,7 @@ exports.randomplay = function (req, res, next) {
   
         p.then(function(array){			
 	var rnd = Math.floor((Math.random()*array.length+1));
-	var newId = models.Quiz.findById(Number(rnd));
+	newId = models.Quiz.findById(Number(rnd));
         var identificador = Promise.resolve(newId);
         identificador.then(function(newId){
 	
