@@ -191,7 +191,6 @@ exports.check = function (req, res, next) {
 
 // GET /quizzes/randomplay 
 var score = 0;
-var newId;
 var almacenar = [];
 
 exports.randomplay = function (req, res, next) {
@@ -204,7 +203,7 @@ exports.randomplay = function (req, res, next) {
   
         p.then(function(array){			
 	var rnd = Math.floor((Math.random()*array.length+1));
-	newId = models.Quiz.findById(Number(rnd));
+	var newId = models.Quiz.findById(Number(rnd));
         var identificador = Promise.resolve(newId);
         identificador.then(function(newId){
 	
@@ -212,7 +211,7 @@ exports.randomplay = function (req, res, next) {
 
 	for(var i=1; i<array.length; i++){
         // Generar un nuevo elemento.
-        //newId = array[Math.floor((Math.random()*array.length+1))];
+        newId = array[Math.floor((Math.random()*array.length+1))];
         // Si el elemento no se encuentra en lote[] agregar (push), en caso
         // de que sea se encuentre (continue;), saltar al siguente.
       	if(almacenar[newId]!=-1){continue;} else {almacenar.push(newId);}     	
