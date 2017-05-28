@@ -253,7 +253,7 @@ exports.randomplay = function (req, res, next) {
       	if(almacenar[newId]!=-1){continue;} else {almacenar.push(newId);}     	
 	}
 	
-	if(score < array.length+1){
+	if(score < array.length){
 
 	 res.render('quizzes/random_play', {
 	    quiz : newId,
