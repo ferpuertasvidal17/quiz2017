@@ -5,7 +5,12 @@ var Sequelize = require('sequelize');
 // Autoload la pista asociado a :tipId
 exports.load = function (req, res, next, tipId) {
 
-    models.Tip.findById(tipId)
+    models.Tip.findById(tipId
+, {
+		include: [ 
+			 {model: models.User, as: 'Author'}
+		]
+})
     .then(function (tip) {
         if (tip) {
             req.tip = tip;
@@ -67,6 +72,7 @@ exports.create = function (req, res, next) {
 };
 
 
+
 // GET /quizzes/:quizId/tips/:tipId/accept
 exports.accept = function (req, res, next) {
 
@@ -89,6 +95,7 @@ exports.destroy = function (req, res, next) {
 
     req.tip.destroy()
     .then(function () {
+
         req.flash('success', 'Pista eliminada con éxito.');
         res.redirect('/quizzes/' + req.params.quizId);
     })
@@ -96,3 +103,4 @@ exports.destroy = function (req, res, next) {
         next(error);
     });
 };
+
